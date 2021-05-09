@@ -137,7 +137,7 @@ Download_brook(){
     [[ ! -e ${file} ]] && mkdir ${file}
     cd ${file}
     if [[ ${bit} == "x86_64" ]]; then
-        wget --no-check-certificate -N "https://github.com/txthinking/brook/releases/download/${brook_new_ver}/brook"
+        wget --no-check-certificate -N "https://github.com/txthinking/brook/releases/download/${brook_new_ver}/brook_linux_amd64" && mv brook_linux_amd64 brook
     else
         wget --no-check-certificate -N "https://github.com/txthinking/brook/releases/download/${brook_new_ver}/brook_linux_386"
         mv brook_linux_386 brook
@@ -147,7 +147,7 @@ Download_brook(){
 }
 Service_brook(){
     if [[ ${release} = "centos" ]]; then
-        if ! wget --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/service/brook-pf_centos -O /etc/init.d/brook-pf; then
+        if ! wget --no-check-certificate https://raw.githubusercontent.com/giftedunicorn/brook/master/brook-pf_centos -O /etc/init.d/brook-pf; then
             echo -e "${Error} Brook服务 管理脚本下载失败 !" && exit 1
         fi
         chmod +x /etc/init.d/brook-pf
@@ -283,7 +283,7 @@ Set_brook(){
     elif [[ ${bk_modify} == "4" ]]; then
         Modify_Enabled_pf
     elif [[ ${bk_modify} == "0" ]]; then
-        Add_pf_with_domin
+        Add_pf_with_domain
     else
         echo -e "${Error} 请输入正确的数字(0-4)" && exit 1
     fi
@@ -339,7 +339,7 @@ list_port(){
         echo -e "========================\n"
     fi
 }
-Add_pf_with_domin(){
+Add_pf_with_domain(){
     while true
     do
         list_port "ADD"
